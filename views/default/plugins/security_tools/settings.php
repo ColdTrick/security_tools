@@ -23,6 +23,12 @@ echo "&nbsp;" . elgg_view("input/text", array("name" => "params[secure_upgrade_k
 echo "<div class='elgg-subtext'>" . elgg_echo("security_tools:settings:secure_upgrade_key:description", array($example_upgrade_url)) . "</div>";
 echo "</div>";
 
+echo "<div>";
+echo elgg_echo("security_tools:settings:secure_upgrade:bypass");
+echo "&nbsp;" . elgg_view("input/dropdown", array("name" => "params[secure_upgrade_bypass]", "value" => $plugin->secure_upgrade_bypass, "options_values" => array_reverse($yesno_options, true)));
+echo "<div class='elgg-subtext'>" . elgg_echo("security_tools:settings:secure_upgrade:bypass:description") . "</div>";
+echo "</div>";
+
 // secure cron
 $code = security_tools_generate_cron_code();
 $example_cron_url = $vars["url"] . "cron/minute/" . $code;
