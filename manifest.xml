@@ -5,8 +5,10 @@
 	<version>1.0</version>
 	<description>Help secure your Elgg installation.</description>
 	<website>http://www.coldtrick.com/</website>
+	<repository>https://github.com/ColdTrick/security_tools</repository>
+	<bugtracker>https://github.com/ColdTrick/security_tools/issues</bugtracker>
 	<copyright>(C) ColdTrick IT Solutions 2012</copyright>
-	<license>GNU Public License version 2</license>
+	<license>GNU General Public License version 2</license>
  	
  	<requires>
 		<type>elgg_release</type>
