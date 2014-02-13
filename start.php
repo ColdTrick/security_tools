@@ -20,10 +20,11 @@ function security_tools_init() {
 	if (defined("UPGRADING")) {
 		security_tools_protect_upgrade();
 	}
-	
+
 	// extend views
 	elgg_extend_view("admin/settings/advanced/site_secret", "security_tools/site_secret");
-	
+	elgg_extend_view("input/password", "security_tools/input_password", 100);
+
 	// register events
 	elgg_register_event_handler("make_admin", "user", "security_tools_make_admin_handler");
 	elgg_register_event_handler("remove_admin", "user", "security_tools_remove_admin_handler");
