@@ -14,6 +14,7 @@ $upgrade_settings = "<div>";
 $upgrade_settings .= elgg_echo("security_tools:settings:secure_upgrade");
 $upgrade_settings .= "&nbsp;" . elgg_view("input/dropdown", array("name" => "params[secure_upgrade]", "value" => $plugin->secure_upgrade, "options_values" => $yesno_options));
 $upgrade_settings .= "<div class='elgg-subtext'>" . elgg_echo("security_tools:settings:secure_upgrade:description") . "</div>";
+$upgrade_settings .= "<pre>" . elgg_get_site_url() . "upgrade.php?code=" . security_tools_generate_upgrade_code() . "</pre>";
 $upgrade_settings .= "</div>";
 
 // Mail

@@ -19,4 +19,7 @@ function security_tools_init() {
 	if (defined("UPGRADING")) {
 		security_tools_protect_upgrade();
 	}
+	
+	// extend views
+	elgg_extend_view("admin/settings/advanced/site_secret", "security_tools/site_secret");
 }
