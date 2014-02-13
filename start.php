@@ -17,9 +17,6 @@ elgg_register_event_handler("init", "system", "security_tools_init");
 function security_tools_init() {
 	// check if we are running upgrade.php
 	if (defined("UPGRADING")) {
-		// is upgrade.php secured
-		if (elgg_get_plugin_setting("secure_upgrade", "security_tools") != "no") {
-			admin_gatekeeper();
-		}
+		security_tools_protect_upgrade();
 	}
 }
