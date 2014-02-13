@@ -45,7 +45,7 @@ $mail_settings .= "</div>";
 $mail_settings .= "<div>";
 $mail_settings .= elgg_echo("security_tools:settings:mails_verify_email_change");
 $mail_settings .= "&nbsp;" . elgg_view("input/dropdown", array("name" => "params[mails_verify_email_change]", "value" => $plugin->mails_verify_email_change, "options_values" => $yesno_options));
-$mail_settings .= "<div class='elgg-subtext'>" . elgg_echo("security_tools:settings:mails:verify_email_change:description") . "</div>";
+$mail_settings .= "<div class='elgg-subtext'>" . elgg_echo("security_tools:settings:mails_verify_email_change:description") . "</div>";
 $mail_settings .= "</div>";
 
 
