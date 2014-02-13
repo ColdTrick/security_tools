@@ -62,7 +62,13 @@ If you believe this was done in error, please contact one of the other site admi
 Your site administrator role was removed by %s.
 
 If you believe this was done in error, please contact one of the other site administrators.",
+	
+	'security_tools:notify_user:password:subject' => "Your password has been changed",
+	'security_tools:notify_user:password:message' => "Hi %s,
 
+Your password for %s has been changed.
+
+If you didn't do this or requested this. Please go to %s and request a new password or contact a site administrator.",
 );
 
 add_translation("en", $english);
