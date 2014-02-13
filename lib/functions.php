@@ -102,7 +102,7 @@ function security_tools_prepare_email_change() {
 						$validation_url
 					));
 					
-					notify_user($user->getGUID(), $site->getGUID(), $subject, $message);
+					notify_user($user->getGUID(), $site->getGUID(), $subject, $message, null, "email");
 					
 					// save the validation request
 					// but first revoke previous request

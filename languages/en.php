@@ -83,6 +83,13 @@ You requested to change your e-mail address on %s to this e-mail address.
 
 In order to complete the request click on this link:
 %s",
+	
+	'security_tools:notify_user:email_change:subject' => "E-mail address changed for %s",
+	'security_tools:notify_user:email_change:message' => "Hi %s,
+
+You e-mail address on %s has been changed.
+
+If you didn't do this or requested this. Please contact a site administrator.",
 );
 
 add_translation("en", $english);

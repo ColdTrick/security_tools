@@ -23,6 +23,16 @@ if (!empty($user_guid) && !empty($validation_code)) {
 			$valid_code = security_tools_generate_email_code($user, $new_email);
 			
 			if ($validation_code === $valid_code) {
+				$site = elgg_get_site_entity();
+				
+				// send confirmation to old email that change occured
+				$subject = elgg_echo("security_tools:notify_user:email_change:subject", array($site->name));
+				$message = elgg_echo("security_tools:notify_user:email_change:message", array(
+					$user->name,
+					$site->name,
+				));
+				notify_user($user->getGUID(), $site->getGUID(), $subject, $message, null, "email");
+				
 				$user->email = $new_email;
 				
 				if ($user->save()) {
