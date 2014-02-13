@@ -4,6 +4,7 @@
  */
 
 require_once(dirname(__FILE__) . "/lib/functions.php");
+require_once(dirname(__FILE__) . "/lib/events.php");
 require_once(dirname(__FILE__) . "/lib/hooks.php");
 
 // register default Elgg events
@@ -22,4 +23,8 @@ function security_tools_init() {
 	
 	// extend views
 	elgg_extend_view("admin/settings/advanced/site_secret", "security_tools/site_secret");
+	
+	// register events
+	elgg_register_event_handler("make_admin", "user", "security_tools_make_admin_handler");
+	elgg_register_event_handler("remove_admin", "user", "security_tools_remove_admin_handler");
 }
