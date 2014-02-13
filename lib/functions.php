@@ -52,5 +52,13 @@ function security_tools_generate_upgrade_code() {
 function security_tools_validate_upgrade_code($code) {
 	$result = false;
 	
+	if (!empty($code)) {
+		$valid_code = security_tools_generate_upgrade_code();
+		
+		if ($valid_code === $code) {
+			$result = true;
+		}
+	}
+	
 	return $result;
 }
