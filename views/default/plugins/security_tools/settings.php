@@ -48,15 +48,12 @@ $mail_settings .= "&nbsp;" . elgg_view("input/dropdown", array("name" => "params
 $mail_settings .= "<div class='elgg-subtext'>" . elgg_echo("security_tools:settings:mails_verify_email_change:description") . "</div>";
 $mail_settings .= "</div>";
 
-
-
 // Other
 $other_settings = "<div>";
 $other_settings .= elgg_echo("security_tools:settings:disable_autocomplete_on_password_fields");
 $other_settings .= "&nbsp;" . elgg_view("input/dropdown", array("name" => "params[disable_autocomplete_on_password_fields]", "value" => $plugin->disable_autocomplete_on_password_fields, "options_values" => $noyes_options));
 $other_settings .= "<div class='elgg-subtext'>" . elgg_echo("security_tools:settings:disable_autocomplete_on_password_fields:description") . "</div>";
 $other_settings .= "</div>";
-
 
 echo elgg_view_module("inline", elgg_echo("upgrade"), $upgrade_settings);
 echo elgg_view_module("inline", elgg_echo("security_tools:settings:mails"), $mail_settings);
