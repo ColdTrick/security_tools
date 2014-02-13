@@ -93,7 +93,7 @@ function security_tools_prepare_email_change() {
 					$user->save();
 					
 					// build notification
-					$validation_url = $site->url . "email_change_confirmation?u=" . $user->getGUID() . "&c=" .$validation_code;
+					$validation_url = $site->url . "email_change_confirmation?u=" . $user->getGUID() . "&c=" . $validation_code;
 					
 					$subject = elgg_echo("security_tools:notify_user:email_change_request:subject", array($site->name));
 					$message = elgg_echo("security_tools:notify_user:email_change_request:message", array(
