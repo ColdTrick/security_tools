@@ -23,7 +23,7 @@ function security_tools_usersettings_save_handler($hook, $type, $return_value, $
 	}
 	
 	$user = get_user($user_guid);
-	if (!empty($user)) {
+	if (!empty($user) && $user->canEdit()) {
 		// do the default usersettings actions, but listen to some off the results
 		elgg_set_user_language();
 		elgg_set_user_default_access();
@@ -44,6 +44,14 @@ function security_tools_usersettings_save_handler($hook, $type, $return_value, $
 			}
 		}
 		
-		elgg_set_user_email();
+		// email are also different
+		$setting = elgg_get_plugin_setting("mails_verify_email_change", "security_tools");
+		if (($setting != "no") && ($user->getGUID() == elgg_get_logged_in_user_guid())) {
+			// verify new email address
+			security_tools_prepare_email_change();
+		} else {
+			// old way, or admin changes your email
+			elgg_set_user_email();
+		}
 	}
 }

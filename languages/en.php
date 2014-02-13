@@ -29,6 +29,12 @@ $english = array(
 	// site secret
 	'security_tools:site_secret:warning' => "After you regenerate the site secret, <a href='%s'>please check out</a> the new Upgrade.php code you'll need.",
 
+	// email change
+	'security_tools:usersettings:email:request' => "In order to complete your e-mail address change check the inbox of your %s account",
+	'security_tools:email_change_confirmation:error:user' => "You're not the user for whom this request was made",
+	'security_tools:email_change_confirmation:error:request' => "There is no pending e-mail address change",
+	'security_tools:email_change_confirmation:error:code' => "The supplied validation code is incorrect, please check your e-mail message",
+	
 	// admin notifications
 	'security_tools:notify_admins:make_admin:subject' => "A new site administrator was assigned for %s",
 	'security_tools:notify_admins:make_admin:message' => "Hi,
@@ -69,6 +75,14 @@ If you believe this was done in error, please contact one of the other site admi
 Your password for %s has been changed.
 
 If you didn't do this or requested this. Please go to %s and request a new password or contact a site administrator.",
+
+	'security_tools:notify_user:email_change_request:subject' => "E-mail address change request for %s",
+	'security_tools:notify_user:email_change_request:message' => "Hi %s,
+
+You requested to change your e-mail address on %s to this e-mail address.
+
+In order to complete the request click on this link:
+%s",
 );
 
 add_translation("en", $english);
