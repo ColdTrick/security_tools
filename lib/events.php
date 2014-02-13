@@ -69,7 +69,7 @@ function security_tools_make_admin_handler($event, $type, ElggUser $user) {
 					$site->url
 				));
 				
-				notify_user($user->getGUID(), $site->getGUID(), $subject, $message);
+				notify_user($user->getGUID(), $site->getGUID(), $subject, $message, null, "email");
 			}
 		}
 	}
@@ -143,7 +143,7 @@ function security_tools_remove_admin_handler($event, $type, ElggUser $user) {
 					$logged_in_user->name
 				));
 				
-				notify_user($user->getGUID(), $site->getGUID(), $subject, $message);
+				notify_user($user->getGUID(), $site->getGUID(), $subject, $message, null, "email");
 			}
 		}
 	}
