@@ -13,7 +13,7 @@ $lang = get_current_language();
 $url = elgg_get_site_url() . "upgrade.php?upgrade=upgrade";
 $code = get_input("code");
 if (!empty($code)) {
-	elgg_http_add_url_query_elements($url, array("code" => $code));
+	$url = elgg_http_add_url_query_elements($url, array("code" => $code));
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
