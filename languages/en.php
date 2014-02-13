@@ -24,6 +24,7 @@ The user %s was assigned as a new site administrator by %s.
 Check out the profile of the new site administrator here %s.
 
 If you believe this was done in error, please login here %s and undo this action.",
+	
 	'security_tools:notify_admins:remove_admin:subject' => "A site administrator was removed from %s",
 	'security_tools:notify_admins:remove_admin:message' => "Hi,
 
@@ -31,6 +32,23 @@ The user %s is no longer a site administrator. This action was taken by %s.
 Check out the profile of the old site administrator here %s.
 
 If you believe this was done in error, please login here %s and undo this action.",
+	
+	// user notifications
+	'security_tools:notify_user:make_admin:subject' => "You're granted site administrator right on %s",
+	'security_tools:notify_user:make_admin:message' => "Hi %s,
+
+You've been assigned as a new site administrator by %s.
+
+Enjoy your new found rights by logging in here %s.
+
+If you believe this was done in error, please contact one of the other site administrators.",
+	
+	'security_tools:notify_user:remove_admin:subject' => "Your site administrator rights for %s were removed",
+	'security_tools:notify_user:remove_admin:message' => "Hi %s,
+
+Your site administrator role was removed by %s.
+
+If you believe this was done in error, please contact one of the other site administrators.",
 
 );
 
