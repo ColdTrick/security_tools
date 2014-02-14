@@ -148,3 +148,58 @@ function security_tools_remove_admin_handler($event, $type, ElggUser $user) {
 		}
 	}
 }
+
+/**
+ * Event to notify a user that he is banned
+ *
+ * @param string   $event ban
+ * @param string   $type  user
+ * @param ElggUser $user  the affected user
+ *
+ * @return void
+ */
+function security_tools_ban_user_handler($event, $type, ElggUser $user) {
+	
+	if (!empty($user) && elgg_instanceof($user, "user")) {
+		// should we notify the user about this
+		if (elgg_get_plugin_setting("mails_banned", "security_tools") == "yes") {
+			$site = elgg_get_site_entity();
+			
+			$subject = elgg_echo("security_tools:notify_user:ban:subject", array($site->name));
+			$message = elgg_echo("security_tools:notify_user:ban:message", array(
+				$user->name,
+				$site->name
+			));
+			
+			notify_user($user->getGUID(), $site->getGUID(), $subject, $message, null, "email");
+		}
+	}
+}
+
+/**
+ * Event to notify a user that he is unbanned
+ *
+ * @param string   $event unban
+ * @param string   $type  user
+ * @param ElggUser $user  the affected user
+ *
+ * @return void
+ */
+function security_tools_unban_user_handler($event, $type, ElggUser $user) {
+	
+	if (!empty($user) && elgg_instanceof($user, "user")) {
+		// should we notify the user about this
+		if (elgg_get_plugin_setting("mails_banned", "security_tools") == "yes") {
+			$site = elgg_get_site_entity();
+			
+			$subject = elgg_echo("security_tools:notify_user:unban:subject", array($site->name));
+			$message = elgg_echo("security_tools:notify_user:unban:message", array(
+				$user->name,
+				$site->name,
+				$site->url
+			));
+			
+			notify_user($user->getGUID(), $site->getGUID(), $subject, $message, null, "email");
+		}
+	}
+}

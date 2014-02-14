@@ -90,6 +90,21 @@ In order to complete the request click on this link:
 You e-mail address on %s has been changed.
 
 If you didn't do this or requested this. Please contact a site administrator.",
+	
+	'security_tools:notify_user:ban:subject' => "You've been banned from %s",
+	'security_tools:notify_user:ban:message' => "Hi %s,
+
+Your account on %s has been banned, you can no longer use the site.
+
+If you believe this was done in error, please contact one of the other site administrators.",
+	
+	'security_tools:notify_user:unban:subject' => "You're no longer banned from %s",
+	'security_tools:notify_user:unban:message' => "Hi %s,
+
+Your account on %s is no longer banned, you can start using the site again.
+To login go to %s.
+
+If you believe this was done in error, please contact one of the other site administrators.",
 );
 
 add_translation("en", $english);
