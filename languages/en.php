@@ -34,7 +34,7 @@ $english = array(
 	'security_tools:email_change_confirmation:error:user' => "You're not the user for whom this request was made",
 	'security_tools:email_change_confirmation:error:request' => "There is no pending e-mail address change",
 	'security_tools:email_change_confirmation:error:code' => "The supplied validation code is incorrect, please check your e-mail message",
-	
+
 	// admin notifications
 	'security_tools:notify_admins:make_admin:subject' => "A new site administrator was assigned for %s",
 	'security_tools:notify_admins:make_admin:message' => "Hi,
@@ -68,7 +68,7 @@ If you believe this was done in error, please contact one of the other site admi
 Your site administrator role was removed by %s.
 
 If you believe this was done in error, please contact one of the other site administrators.",
-	
+
 	'security_tools:notify_user:password:subject' => "Your password has been changed",
 	'security_tools:notify_user:password:message' => "Hi %s,
 
@@ -83,28 +83,28 @@ You requested to change your e-mail address on %s to this e-mail address.
 
 In order to complete the request click on this link:
 %s",
-	
+
 	'security_tools:notify_user:email_change:subject' => "E-mail address changed for %s",
 	'security_tools:notify_user:email_change:message' => "Hi %s,
 
 You e-mail address on %s has been changed.
 
 If you didn't do this or requested this. Please contact a site administrator.",
-	
+
 	'security_tools:notify_user:ban:subject' => "You've been banned from %s",
 	'security_tools:notify_user:ban:message' => "Hi %s,
 
 Your account on %s has been banned, you can no longer use the site.
 
-If you believe this was done in error, please contact one of the other site administrators.",
-	
+If you believe this was done in error, please contact one of the site administrators.",
+
 	'security_tools:notify_user:unban:subject' => "You're no longer banned from %s",
 	'security_tools:notify_user:unban:message' => "Hi %s,
 
 Your account on %s is no longer banned, you can start using the site again.
 To login go to %s.
 
-If you believe this was done in error, please contact one of the other site administrators.",
+If you believe this was done in error, please contact one of the site administrators.",
 );
 
 add_translation("en", $english);
