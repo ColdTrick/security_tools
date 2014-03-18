@@ -105,6 +105,11 @@ Your account on %s is no longer banned, you can start using the site again.
 To login go to %s.
 
 If you believe this was done in error, please contact one of the site administrators.",
+	
+	// Frame killer
+	'security_tools:settings:enable_frame_killer' => "Add frame busting code (\"frame killer\")",
+	'security_tools:settings:enable_frame_killer:description' => "Note : setting this to Yes will be the prefered choice in most cases.<br />Warning : by activating this code, you will not be able to embed the site into another site through an iframe (depending on used layouts). If you need to embed the site or some parts of it in iframes, please test carefully before activating on a production site, and use disabling code when needed.",
+	
 );
 
 add_translation("en", $english);

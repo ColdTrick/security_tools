@@ -55,6 +55,15 @@ $other_settings .= "&nbsp;" . elgg_view("input/dropdown", array("name" => "param
 $other_settings .= "<div class='elgg-subtext'>" . elgg_echo("security_tools:settings:disable_autocomplete_on_password_fields:description") . "</div>";
 $other_settings .= "</div>";
 
+// Frame killer
+$frame_killer = '<div>';
+$frame_killer .= '<label>' . elgg_echo('security_tools:settings:enable_frame_killer') . '&nbsp;' . elgg_view('input/dropdown', array( 'name' => 'params[framekiller]', 'options_values' => $noyes_options, 'value' => $vars['entity']->enable_framekiller )) . '</label>';
+$frame_killer .= '<div class="elgg-subtext">' . elgg_echo('security_tools:settings:enable_frame_killer:description') . '</div>';
+$frame_killer .= '</div>';
+
+
 echo elgg_view_module("inline", elgg_echo("upgrade"), $upgrade_settings);
 echo elgg_view_module("inline", elgg_echo("security_tools:settings:mails"), $mail_settings);
 echo elgg_view_module("inline", elgg_echo("security_tools:settings:other"), $other_settings);
+echo elgg_view_module("inline", elgg_echo("security_tools:settings:framekiller"), $frame_killer);
+

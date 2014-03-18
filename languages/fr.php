@@ -105,6 +105,11 @@ Votre compte sur %s a été réactivé, vous pouvez de nouveau vous connecter au
 Pour vous connecter, cliquez sur %s.
 
 Si vous pensez qu'il s'agit d'une erreur, veuillez contacter l'un des administrateurs du site.",
+	
+	// Frame killer
+	'security_tools:settings:enable_frame_killer' => "Ajouter un code pour éviter l'insertion comme iframe (\"frame killer\" ou \"frame busting code\")",
+	'security_tools:settings:enable_frame_killer:description' => "Note : l'ajout d'un framekiller est préférable dans la majorité des cas.<br />Attention : l'activation du framekiller bloque l'intégration du site par un site tiers sous forme d'iframe (en fonction des layouts utilisés). Si vous avez besoin d'intégrer ce site ou certains de ses éléments sous forme d'iframe, veuillez tester cette fonctionnalité avec soin avant de l'activer en production, et utilisez le code de désactivation lorsque c'est nécessaire.",
+	
 );
 
 add_translation("fr", $french);
