@@ -57,7 +57,7 @@ $other_settings .= "</div>";
 
 // Frame killer
 $frame_killer = '<div>';
-$frame_killer .= '<label>' . elgg_echo('security_tools:settings:enable_frame_killer') . '&nbsp;' . elgg_view('input/dropdown', array( 'name' => 'params[framekiller]', 'options_values' => $noyes_options, 'value' => $vars['entity']->enable_framekiller )) . '</label>';
+$frame_killer .= '<label>' . elgg_echo('security_tools:settings:enable_frame_killer') . '&nbsp;' . elgg_view('input/dropdown', array('name' => 'params[framekiller]', 'options_values' => $noyes_options, 'value' => $vars['entity']->enable_framekiller)) . '</label>';
 $frame_killer .= '<div class="elgg-subtext">' . elgg_echo('security_tools:settings:enable_frame_killer:description') . '</div>';
 $frame_killer .= '</div>';
 

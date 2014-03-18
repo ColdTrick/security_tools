@@ -39,12 +39,7 @@ function security_tools_init() {
 	elgg_unregister_plugin_hook_handler("usersettings:save", "user", "users_settings_save");
 	elgg_register_plugin_hook_handler("usersettings:save", "user", "security_tools_usersettings_save_handler");
 	
-	// Important : Enable this only if you don't need to include iframes in other websites !!
-	$framekiller = elgg_get_plugin_setting('enable_framekiller', 'security_tools', 100); // Include early
-	if ($framekiller == 'yes') {
+	// Frame killer
 		elgg_extend_view('page/elements/head','security_tools/framekiller');
-	}
-	// If you don't need it in a particular case, use this where needed :
-	//elgg_unextend_view('page/elements/head', 'security_tools/framekiller');
 	
 }

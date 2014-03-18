@@ -79,9 +79,5 @@ uw account op %s is niet langer geblokkeerd. U kunt weer gebruik maken van de si
 
 Indien deze wijziging ongewenst is, kunt u contact opnemen met een van de site beheerders.',
 	
-	// Frame killer @TODO NL
-	'security_tools:settings:enable_frame_killer' => "Add frame busting code (\"frame killer\")",
-	'security_tools:settings:enable_frame_killer:description' => "Note : setting this to Yes will be the prefered choice in most cases.<br />Warning : by activating this code, you will not be able to embed the site into another site through an iframe (depending on used layouts). If you need to embed the site or some parts of it in iframes, please test carefully before activating on a production site, and use disabling code when needed.",
-	
 );
 add_translation("nl", $language);
