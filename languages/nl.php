@@ -78,5 +78,6 @@ Indien deze wijziging ongewenst is, kunt u contact opnemen met een van de site b
 uw account op %s is niet langer geblokkeerd. U kunt weer gebruik maken van de site. Ga naar %s om u aan te melden.
 
 Indien deze wijziging ongewenst is, kunt u contact opnemen met een van de site beheerders.',
+	
 );
 add_translation("nl", $language);
