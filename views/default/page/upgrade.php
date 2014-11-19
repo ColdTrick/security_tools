@@ -10,9 +10,14 @@
  * @uses $var['forward']      A relative path to forward to after upgrade. Defaults to /admin
  */
 
+$forward = elgg_extract('forward', $vars, '/admin');
+if ($forward == '/admin' && !elgg_is_admin_logged_in()) {
+	$forward = '/';
+}
+
 $refresh_url = elgg_http_add_url_query_elements(elgg_get_site_url() . 'upgrade.php', array(
 	'upgrade' => 'upgrade',
-	'forward' => elgg_extract('forward', $vars, '/admin'),
+	'forward' => $forward,
 	// add the security code
 	'code' => get_input('code')
 ));
