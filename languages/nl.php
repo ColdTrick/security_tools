@@ -1,7 +1,12 @@
 <?php
-$language = array (
-  'security_tools' => 'Security Tools',
+/**
+ * This file was created by Translation Editor v2.0
+ * On 2014-11-19 15:06
+ */
+
+return array (
   'security_tools:settings:secure_upgrade' => 'Beveilig upgrade.php',
+  'security_tools' => 'Security Tools',
   'security_tools:settings:secure_upgrade:description' => 'Indien upgrade.php beveiligd is kunnen alleen site beheerder upgrade.php uitvoeren of er moet een speciale code meegestuurd worden (zie onderstaande link).',
   'security_tools:settings:mails' => 'Security emails',
   'security_tools:settings:mails_admin_admins' => 'Meld beheerder bij verandering beheer rechten',
@@ -17,7 +22,6 @@ $language = array (
   'security_tools:settings:other' => 'Overige',
   'security_tools:settings:disable_autocomplete_on_password_fields' => 'Autocomplete of wachtwoord velden uitschakelen',
   'security_tools:settings:disable_autocomplete_on_password_fields:description' => 'Informatie in deze velden kan worden gecached door een browser. Een aanvaller die de browser van het slachtoffer kan benaderen, kan deze informatie stelen. Dit is extra belangrijk indien de site veelal wordt gebruikt op gedeelde computers, zoals in internetcafe\'s of op het vliegveld. Indien autocomplete wordt uitgeschakeld, kunnen password management tools niet meer deze velden invullen. De ondersteuning voor het autocomplete attribuut kan per browser verschillen.',
-  'security_tools:site_secret:warning' => 'Nadat u de site secret opnieuw hebt gegenereerd, <a href="%s">controleer</a> de nieuwe upgrade.php code die u nodig hebt.',
   'security_tools:usersettings:email:request' => 'Om uw email adres wijziging af te ronden, controleer de inhoud van uw %s inbox',
   'security_tools:email_change_confirmation:error:user' => 'U bent niet de gebruiker voor wie dit verzoek is ingediend',
   'security_tools:email_change_confirmation:error:request' => 'Er wacht geen emailadres op een wijziging',
@@ -78,6 +82,4 @@ Indien deze wijziging ongewenst is, kunt u contact opnemen met een van de site b
 uw account op %s is niet langer geblokkeerd. U kunt weer gebruik maken van de site. Ga naar %s om u aan te melden.
 
 Indien deze wijziging ongewenst is, kunt u contact opnemen met een van de site beheerders.',
-	
 );
-add_translation("nl", $language);

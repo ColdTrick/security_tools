@@ -23,7 +23,6 @@ function security_tools_init() {
 	}
 
 	// extend views
-	elgg_extend_view("admin/settings/advanced/site_secret", "security_tools/site_secret");
 	elgg_extend_view("input/password", "security_tools/input_password", 100);
 
 	// register page handlers
@@ -36,10 +35,8 @@ function security_tools_init() {
 	elgg_register_event_handler("unban", "user", "security_tools_unban_user_handler");
 	
 	// register plugin hooks
-	elgg_unregister_plugin_hook_handler("usersettings:save", "user", "users_settings_save");
+	elgg_unregister_plugin_hook_handler("usersettings:save", "user", "_elgg_set_user_email");
+	elgg_unregister_plugin_hook_handler("usersettings:save", "user", "_elgg_set_user_password");
 	elgg_register_plugin_hook_handler("usersettings:save", "user", "security_tools_usersettings_save_handler");
-	
-	// Frame killer
-		elgg_extend_view('page/elements/head','security_tools/framekiller');
 	
 }

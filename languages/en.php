@@ -26,9 +26,6 @@ $english = array(
 	'security_tools:settings:disable_autocomplete_on_password_fields' => "Disable autocomplete on password fields",
 	'security_tools:settings:disable_autocomplete_on_password_fields:description' => "Data entered in these fields will be cached by the browser. An attacker who can access the victim's browser could steal this information. This is especially important if the application is commonly used in shared computers such as cyber cafes or airport terminals. If you disable this, password management tools can no longer autofill these fields. The support for the autocomplete attribute can be browser specific.",
 
-	// site secret
-	'security_tools:site_secret:warning' => "After you regenerate the site secret, <a href='%s'>please check out</a> the new Upgrade.php code you'll need.",
-
 	// email change
 	'security_tools:usersettings:email:request' => "In order to complete your e-mail address change check the inbox of your %s account",
 	'security_tools:email_change_confirmation:error:user' => "You're not the user for whom this request was made",
@@ -105,10 +102,6 @@ Your account on %s is no longer banned, you can start using the site again.
 To login go to %s.
 
 If you believe this was done in error, please contact one of the site administrators.",
-	
-	// Frame killer
-	'security_tools:settings:enable_frame_killer' => "Add frame busting code (\"frame killer\")",
-	'security_tools:settings:enable_frame_killer:description' => "Note : setting this to Yes will be the prefered choice in most cases.<br />Warning : by activating this code, you will not be able to embed the site into another site through an iframe (depending on used layouts). If you need to embed the site or some parts of it in iframes, please test carefully before activating on a production site, and use disabling code when needed.",
 	
 );
 

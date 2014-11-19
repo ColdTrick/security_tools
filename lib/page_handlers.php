@@ -12,7 +12,7 @@
  */
 function security_tools_email_change_confirmation_page_handler($page) {
 	
-	gatekeeper();
+	elgg_gatekeeper();
 	
 	include(dirname(dirname(__FILE__)) . "/procedures/email_change_confirmation.php");
 	
