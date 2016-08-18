@@ -6,7 +6,6 @@
 require_once(dirname(__FILE__) . "/lib/functions.php");
 require_once(dirname(__FILE__) . "/lib/events.php");
 require_once(dirname(__FILE__) . "/lib/hooks.php");
-require_once(dirname(__FILE__) . "/lib/page_handlers.php");
 
 // register default Elgg events
 elgg_register_event_handler("init", "system", "security_tools_init");
@@ -23,7 +22,7 @@ function security_tools_init() {
 	}
 
 	// register page handlers
-	elgg_register_page_handler("email_change_confirmation", "security_tools_email_change_confirmation_page_handler");
+	elgg_register_page_handler('email_change_confirmation', '\ColdTrick\SecurityTools\Email::emailChangeConfirmation');
 	
 	// register events
 	elgg_register_event_handler("make_admin", "user", "security_tools_make_admin_handler");
@@ -32,7 +31,9 @@ function security_tools_init() {
 	elgg_register_event_handler("unban", "user", "security_tools_unban_user_handler");
 	
 	// register plugin hooks
-	elgg_unregister_plugin_hook_handler("usersettings:save", "user", "_elgg_set_user_email");
+	elgg_unregister_plugin_hook_handler('usersettings:save', 'user', '_elgg_set_user_email');
+	elgg_register_plugin_hook_handler('usersettings:save', 'user', '\ColdTrick\SecurityTools\Email::changeUserEmail');
+	
 	elgg_unregister_plugin_hook_handler("usersettings:save", "user", "_elgg_set_user_password");
 	elgg_register_plugin_hook_handler("usersettings:save", "user", "security_tools_usersettings_save_handler");
 	

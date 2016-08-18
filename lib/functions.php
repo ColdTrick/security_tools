@@ -72,27 +72,23 @@ function security_tools_validate_upgrade_code($code) {
  */
 function security_tools_prepare_email_change() {
 	
-	$user_guid = (int) get_input("guid");
-	$email = get_input("email");
-	
-	if (empty($user_guid)) {
-		$user_guid = elgg_get_logged_in_user_guid();
-	}
+	$user_guid = (int) get_input('guid');
+	$email = get_input('email');
 	
 	$user = get_user($user_guid);
 	
 	if (empty($user) || !is_email_address($email)) {
-		register_error(elgg_echo("email:save:fail"));
+		register_error(elgg_echo('email:save:fail'));
 		return;
 	}
 	
-	if (strcmp($email, $user->email) == 0) {
+	if (strcmp($email, $user->email) === 0) {
 		// no change is email address
 		return;
 	}
 		
 	if (get_user_by_email($email)) {
-		register_error(elgg_echo("registration:dupeemail"));
+		register_error(elgg_echo('registration:dupeemail'));
 		return;
 	}
 	
@@ -104,33 +100,36 @@ function security_tools_prepare_email_change() {
 	$site = elgg_get_site_entity();
 	$current_email = $user->email;
 	
-	// make sure notification goed to new email
+	// make sure notification goes to new email
 	$user->email = $email;
 	$user->save();
 	
 	// build notification
-	$validation_url = $site->url . "email_change_confirmation?u=" . $user->getGUID() . "&c=" . $validation_code;
+	$validation_url = elgg_normalize_url(elgg_http_add_url_query_elements('email_change_confirmation', [
+		'u' => $user->getGUID(),
+		'c' => $validation_code,
+	]));
 	
-	$subject = elgg_echo("security_tools:notify_user:email_change_request:subject", array($site->name));
-	$message = elgg_echo("security_tools:notify_user:email_change_request:message", array(
+	$subject = elgg_echo('security_tools:notify_user:email_change_request:subject', [$site->name]);
+	$message = elgg_echo('security_tools:notify_user:email_change_request:message', [
 		$user->name,
 		$site->name,
-		$validation_url
-	));
+		$validation_url,
+	]);
 	
-	notify_user($user->getGUID(), $site->getGUID(), $subject, $message, null, "email");
+	notify_user($user->getGUID(), $site->getGUID(), $subject, $message, null, 'email');
 	
 	// save the validation request
 	// but first revoke previous request
-	$user->deleteAnnotations("email_change_confirmation");
+	$user->deleteAnnotations('email_change_confirmation');
 	
-	$user->annotate("email_change_confirmation", $email, ACCESS_PRIVATE, $user->getGUID());
+	$user->annotate('email_change_confirmation', $email, ACCESS_PRIVATE, $user->getGUID());
 	
 	// restore current email address
 	$user->email = $current_email;
 	$user->save();
 	
-	system_message(elgg_echo("security_tools:usersettings:email:request", array($email)));
+	system_message(elgg_echo('security_tools:usersettings:email:request', [$email]));
 }
 
 /**
@@ -139,11 +138,11 @@ function security_tools_prepare_email_change() {
  * @param ElggUser $user  the user who's email address will be changed
  * @param string   $email the new email address
  *
- * @return string|boolean the validation code or false
+ * @return string|false the validation code or false
  */
 function security_tools_generate_email_code(ElggUser $user, $email) {
 	
-	if (empty($user) || !elgg_instanceof($user, "user")) {
+	if (!($user instanceof ElggUser)) {
 		return false;
 	}
 	
@@ -153,5 +152,5 @@ function security_tools_generate_email_code(ElggUser $user, $email) {
 	
 	$site_secret = get_site_secret();
 	
-	return hash_hmac("sha256", ($user->getGUID() . "|" . $email . "|" . $user->time_created), $site_secret);
+	return hash_hmac('sha256', ($user->getGUID() . '|' . $email . '|' . $user->time_created), $site_secret);
 }

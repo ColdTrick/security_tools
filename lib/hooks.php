@@ -46,14 +46,4 @@ function security_tools_usersettings_save_handler($hook, $type, $return_value, $
 			notify_user($user->getGUID(), $site->getGUID(), $subject, $message, null, "email");
 		}
 	}
-	
-	// email are also different
-	$setting = elgg_get_plugin_setting("mails_verify_email_change", "security_tools");
-	if (($setting != "no") && ($user->getGUID() == elgg_get_logged_in_user_guid())) {
-		// verify new email address
-		security_tools_prepare_email_change();
-	} else {
-		// old way, or admin changes your email
-		_elgg_set_user_email();
-	}
 }
