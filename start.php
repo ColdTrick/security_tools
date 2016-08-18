@@ -17,7 +17,7 @@ elgg_register_event_handler("init", "system", "security_tools_init");
 function security_tools_init() {
 	// check if we are running upgrade.php
 	if (defined("UPGRADING")) {
-		security_tools_protect_upgrade();
+		ColdTrick\SecurityTools\Upgrade::protect();
 	}
 
 	// register page handlers
