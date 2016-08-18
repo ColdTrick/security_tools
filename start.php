@@ -5,7 +5,6 @@
 
 require_once(dirname(__FILE__) . "/lib/functions.php");
 require_once(dirname(__FILE__) . "/lib/events.php");
-require_once(dirname(__FILE__) . "/lib/hooks.php");
 
 // register default Elgg events
 elgg_register_event_handler("init", "system", "security_tools_init");
@@ -34,8 +33,8 @@ function security_tools_init() {
 	elgg_unregister_plugin_hook_handler('usersettings:save', 'user', '_elgg_set_user_email');
 	elgg_register_plugin_hook_handler('usersettings:save', 'user', '\ColdTrick\SecurityTools\Email::changeUserEmail');
 	
-	elgg_unregister_plugin_hook_handler("usersettings:save", "user", "_elgg_set_user_password");
-	elgg_register_plugin_hook_handler("usersettings:save", "user", "security_tools_usersettings_save_handler");
+	elgg_unregister_plugin_hook_handler('usersettings:save', 'user', '_elgg_set_user_password');
+	elgg_register_plugin_hook_handler('usersettings:save', 'user', '\ColdTrick\SecurityTools\Password::changePassword');
 	
 	elgg_register_plugin_hook_handler('view_vars', 'input/password', '\ColdTrick\SecurityTools\Password::inputPassword');
 	
