@@ -22,9 +22,6 @@ function security_tools_init() {
 		security_tools_protect_upgrade();
 	}
 
-	// extend views
-	elgg_extend_view("input/password", "security_tools/input_password", 100);
-
 	// register page handlers
 	elgg_register_page_handler("email_change_confirmation", "security_tools_email_change_confirmation_page_handler");
 	
@@ -38,5 +35,7 @@ function security_tools_init() {
 	elgg_unregister_plugin_hook_handler("usersettings:save", "user", "_elgg_set_user_email");
 	elgg_unregister_plugin_hook_handler("usersettings:save", "user", "_elgg_set_user_password");
 	elgg_register_plugin_hook_handler("usersettings:save", "user", "security_tools_usersettings_save_handler");
+	
+	elgg_register_plugin_hook_handler('view_vars', 'input/password', '\ColdTrick\SecurityTools\Password::inputPassword');
 	
 }
