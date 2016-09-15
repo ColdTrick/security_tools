@@ -1,6 +1,14 @@
 Version history
 ===============
 
+3.0 (2016-09-15):
+
+- changed: elgg requirement set to 2.0
+- changed: email change validation reworked
+- changed: input/password now done using view_vars hook
+- changed: password change notification moved to class callback
+- changed: upgrade protection now in classes
+
 2.0 (2014-11-19):
 
 - changes for Elgg 1.9
