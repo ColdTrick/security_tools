@@ -51,7 +51,7 @@ function security_tools_make_admin_handler($event, $type, ElggUser $user) {
 			
 			foreach ($admins as $admin) {
 				// force notifications to email so nobody misses this
-				notify_user($admin->getGUID(), $site->getGUID(), $subject, $message, null, "email");
+				notify_user($admin->getGUID(), $site->getGUID(), $subject, $message, array(), "email");
 			}
 		}
 	}
@@ -74,7 +74,7 @@ function security_tools_make_admin_handler($event, $type, ElggUser $user) {
 				$site->url
 			));
 			
-			notify_user($user->getGUID(), $site->getGUID(), $subject, $message, null, "email");
+			notify_user($user->getGUID(), $site->getGUID(), $subject, $message, array(), "email");
 		}
 	}
 }
@@ -130,7 +130,7 @@ function security_tools_remove_admin_handler($event, $type, ElggUser $user) {
 			
 			foreach ($admins as $admin) {
 				// force notifications to email so nobody misses this
-				notify_user($admin->getGUID(), $site->getGUID(), $subject, $message, null, "email");
+				notify_user($admin->getGUID(), $site->getGUID(), $subject, $message, array(), "email");
 			}
 		}
 	}
@@ -152,7 +152,7 @@ function security_tools_remove_admin_handler($event, $type, ElggUser $user) {
 				$logged_in_user->name
 			));
 			
-			notify_user($user->getGUID(), $site->getGUID(), $subject, $message, null, "email");
+			notify_user($user->getGUID(), $site->getGUID(), $subject, $message, array(), "email");
 		}
 	}
 }
@@ -186,7 +186,7 @@ function security_tools_ban_user_handler($event, $type, ElggUser $user) {
 		$site->name
 	));
 	
-	notify_user($user->getGUID(), $site->getGUID(), $subject, $message, null, "email");
+	notify_user($user->getGUID(), $site->getGUID(), $subject, $message, array(), "email");
 }
 
 /**
@@ -219,5 +219,5 @@ function security_tools_unban_user_handler($event, $type, ElggUser $user) {
 		$site->url
 	));
 	
-	notify_user($user->getGUID(), $site->getGUID(), $subject, $message, null, "email");
+	notify_user($user->getGUID(), $site->getGUID(), $subject, $message, array(), "email");
 }
