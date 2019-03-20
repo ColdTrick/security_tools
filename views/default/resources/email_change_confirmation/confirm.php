@@ -52,12 +52,12 @@ $message = elgg_echo('security_tools:notify_user:email_change:message', [
 	$user->name,
 	$site->name,
 ]);
-notify_user($user->getGUID(), $site->getGUID(), $subject, $message, null, 'email');
+notify_user($user->getGUID(), $site->getGUID(), $subject, $message, array(), 'email');
 
 $user->email = $new_email;
 if ($user->save()) {
 	$user->deleteAnnotations('email_change_confirmation');
-	
+
 	system_message(elgg_echo('email:save:success'));
 	forward($user->getURL());
 }

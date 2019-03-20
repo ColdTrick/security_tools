@@ -12,26 +12,40 @@
  *
  * @return void
  */
+ use Elgg\Database\QueryBuilder;
+ use Elgg\Database\Clauses\JoinClause;
+
 function security_tools_make_admin_handler($event, $type, ElggUser $user) {
-	
+
 	if (empty($user) || !elgg_instanceof($user, "user")) {
 		return;
 	}
-	
+
 	$site = elgg_get_site_entity();
 	$logged_in_user = elgg_get_logged_in_user_entity();
-	
+
 	// notify other administrators about this
 	$setting = elgg_get_plugin_setting("mails_admin_admins", "security_tools");
 	if ($setting != "no") {
 		// get all the site administrators
 		$options = array(
 			"limit" => false,
-			"joins" => array("JOIN " . elgg_get_config("dbprefix") . "entity_relationships r ON e.guid = r.guid_one"),
-			"wheres" => array("(r.relationship = 'member_of_site' AND r.guid_two = " . $site->getGUID() . ")")
+			'joins' => [
+					new JoinClause('entity_relationships', 'ers', function(QueryBuilder $qb, $joined_alias, $main_alias) {
+							return $qb->compare("$joined_alias.guid_two", '=', "$main_alias.guid");
+					}),
+				],
+			'wheres' => [
+					function (QueryBuilder $qb) use ($site) {
+						return $qb->merge([
+							$qb->compare("ers.relationship", '=','member_of_site', ELGG_VALUE_STRING),
+							$qb->compare("ers.guid_two", '=', $site->getGUID(), ELGG_VALUE_GUID),
+						]);
+					},
+				],
 		);
 		$admins = elgg_get_admins($options);
-		
+
 		// allow other plugins to modify the admins
 		$params = array(
 			"event" => "make_admin",
@@ -48,14 +62,14 @@ function security_tools_make_admin_handler($event, $type, ElggUser $user) {
 				$user->getURL(),
 				$site->url
 			));
-			
+
 			foreach ($admins as $admin) {
 				// force notifications to email so nobody misses this
 				notify_user($admin->getGUID(), $site->getGUID(), $subject, $message, array(), "email");
 			}
 		}
 	}
-	
+
 	// notify the user about this
 	$setting = elgg_get_plugin_setting("mails_admin_user", "security_tools");
 	if ($setting == "yes") {
@@ -73,7 +87,7 @@ function security_tools_make_admin_handler($event, $type, ElggUser $user) {
 				$logged_in_user->name,
 				$site->url
 			));
-			
+
 			notify_user($user->getGUID(), $site->getGUID(), $subject, $message, array(), "email");
 		}
 	}
@@ -89,28 +103,37 @@ function security_tools_make_admin_handler($event, $type, ElggUser $user) {
  * @return void
  */
 function security_tools_remove_admin_handler($event, $type, ElggUser $user) {
-	
+
 	if (empty($user) || !elgg_instanceof($user, "user")) {
 		return;
 	}
-	
+
 	$site = elgg_get_site_entity();
 	$logged_in_user = elgg_get_logged_in_user_entity();
-	
+
 	// notify other administrators about this
 	$setting = elgg_get_plugin_setting("mails_admin_admins", "security_tools");
 	if ($setting != "no") {
 		// get all the site administrators
 		$options = array(
 			"limit" => false,
-			"joins" => array("JOIN " . elgg_get_config("dbprefix") . "entity_relationships r ON e.guid = r.guid_one"),
-			"wheres" => array(
-				"(r.relationship = 'member_of_site' AND r.guid_two = " . $site->getGUID() . ")",
-				"(e.guid <> " . $user->getGUID() . ")"
-			)
+			'joins' => [
+					new JoinClause('entity_relationships', 'ers', function(QueryBuilder $qb, $joined_alias, $main_alias) use ($site) {
+							return $qb->compare("$joined_alias.guid_two", '=', "$main_alias.guid");
+					}),
+				],
+			'wheres' => [
+					function (QueryBuilder $qb) use ($site,$user) {
+						return $qb->merge([
+							$qb->compare("ers.relationship", '=','member_of_site', ELGG_VALUE_STRING),
+							$qb->compare("ers.guid_two", '=', $site->getGUID(), ELGG_VALUE_GUID),
+							$qb->compare("e.guid", '<>', $user->getGUID(), ELGG_VALUE_GUID),
+						]);
+					},
+				],
 		);
 		$admins = elgg_get_admins($options);
-		
+
 		// allow other plugins to modify the admins
 		$params = array(
 			"event" => "remove_admin",
@@ -127,14 +150,14 @@ function security_tools_remove_admin_handler($event, $type, ElggUser $user) {
 				$user->getURL(),
 				$site->url
 			));
-			
+
 			foreach ($admins as $admin) {
 				// force notifications to email so nobody misses this
 				notify_user($admin->getGUID(), $site->getGUID(), $subject, $message, array(), "email");
 			}
 		}
 	}
-	
+
 	// notify the user about this
 	$setting = elgg_get_plugin_setting("mails_admin_user", "security_tools");
 	if ($setting == "yes") {
@@ -151,7 +174,7 @@ function security_tools_remove_admin_handler($event, $type, ElggUser $user) {
 				$user->name,
 				$logged_in_user->name
 			));
-			
+
 			notify_user($user->getGUID(), $site->getGUID(), $subject, $message, array(), "email");
 		}
 	}
@@ -167,25 +190,25 @@ function security_tools_remove_admin_handler($event, $type, ElggUser $user) {
  * @return void
  */
 function security_tools_ban_user_handler($event, $type, ElggUser $user) {
-	
+
 	if (empty($user) || !elgg_instanceof($user, "user")) {
 		return;
 	}
-	
+
 	// should we notify the user about this
 	$setting = elgg_get_plugin_setting("mails_banned", "security_tools");
 	if ($setting != "yes") {
 		return;
 	}
-	
+
 	$site = elgg_get_site_entity();
-	
+
 	$subject = elgg_echo("security_tools:notify_user:ban:subject", array($site->name));
 	$message = elgg_echo("security_tools:notify_user:ban:message", array(
 		$user->name,
 		$site->name
 	));
-	
+
 	notify_user($user->getGUID(), $site->getGUID(), $subject, $message, array(), "email");
 }
 
@@ -199,25 +222,25 @@ function security_tools_ban_user_handler($event, $type, ElggUser $user) {
  * @return void
  */
 function security_tools_unban_user_handler($event, $type, ElggUser $user) {
-	
+
 	if (empty($user) || !elgg_instanceof($user, "user")) {
 		return;
 	}
-	
+
 	// should we notify the user about this
 	$setting = elgg_get_plugin_setting("mails_banned", "security_tools");
 	if ($setting != "yes") {
 		return;
 	}
-	
+
 	$site = elgg_get_site_entity();
-	
+
 	$subject = elgg_echo("security_tools:notify_user:unban:subject", array($site->name));
 	$message = elgg_echo("security_tools:notify_user:unban:message", array(
 		$user->name,
 		$site->name,
 		$site->url
 	));
-	
+
 	notify_user($user->getGUID(), $site->getGUID(), $subject, $message, array(), "email");
 }

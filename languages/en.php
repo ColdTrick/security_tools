@@ -3,7 +3,7 @@
  * English translation for this plugin
  */
 
-$english = array(
+return array(
 	'security_tools' => "Security Tools",
 
 	// settings
@@ -102,7 +102,5 @@ Your account on %s is no longer banned, you can start using the site again.
 To login go to %s.
 
 If you believe this was done in error, please contact one of the site administrators.",
-	
-);
 
-add_translation("en", $english);
+);

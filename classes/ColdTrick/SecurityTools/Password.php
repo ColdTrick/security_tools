@@ -3,7 +3,7 @@
 namespace ColdTrick\SecurityTools;
 
 class Password {
-	
+
 	/**
 	 * Change the view vars for input/password
 	 *
@@ -14,17 +14,17 @@ class Password {
 	 *
 	 * @return void|array
 	 */
-	public static function inputPassword($hook, $type, $return_value, $params) {
-		
+	public static function inputPassword(\Elgg\Hook $hook) {
+
 		if (elgg_get_plugin_setting('disable_autocomplete_on_password_fields', 'security_tools') !== 'yes') {
 			return;
 		}
-		
+
 		$return_value['autocomplete'] = 'off';
-		
+
 		return $return_value;
 	}
-	
+
 	/**
 	 * Listen to the password changed of a users
 	 *
@@ -35,32 +35,32 @@ class Password {
 	 *
 	 * @return void|bool
 	 */
-	public static function changePassword($hook, $type, $return_value, $params) {
-		
+	public static function changePassword(\Elgg\Hook $hook) {
+
 		$user_guid = (int) get_input('guid');
 		$user = get_user($user_guid);
 		if (!($user instanceof \ElggUser) || !$user->canEdit()) {
 			return;
 		}
-		
-		$result = _elgg_set_user_password();
+
+		$result = _elgg_set_user_password($hook);
 		if ($result === true) {
 			// do we need to notify the user about a password change
 			$setting = elgg_get_plugin_setting('mails_password_change', 'security_tools');
 			if ($setting !== 'no') {
 				$site = elgg_get_site_entity();
-				
+
 				$subject = elgg_echo('security_tools:notify_user:password:subject');
 				$message = elgg_echo('security_tools:notify_user:password:message', [
 					$user->name,
 					$site->name,
 					$site->getURL(),
 				]);
-				
-				notify_user($user->getGUID(), $site->getGUID(), $subject, $message, null, 'email');
+
+				notify_user($user->getGUID(), $site->getGUID(), $subject, $message, array(), 'email');
 			}
 		}
-		
+
 		return $result;
 	}
 }

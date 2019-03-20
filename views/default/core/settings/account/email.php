@@ -13,6 +13,7 @@ if (!$user instanceof ElggUser) {
 }
 
 $options = array(
+	'#type' => 'email',
 	'name' => 'email',
 	'value' => $user->email,
 	'label' => elgg_echo('email:address:label'),
@@ -24,11 +25,11 @@ $request = $user->getAnnotations([
 ]);
 if (!empty($request)) {
 	$new_email = $request[0]->value;
-	
-	$options['help'] = elgg_echo('security_tools:usersettings:email:request', [$new_email]);
+
+	$options['#help'] = elgg_echo('security_tools:usersettings:email:request', [$new_email]);
 }
 
 $title = elgg_echo('email:settings');
-$content = elgg_view_input('email', $options);
+$content = elgg_view_field($options);
 
 echo elgg_view_module('info', $title, $content);
